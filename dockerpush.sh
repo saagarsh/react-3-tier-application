@@ -12,13 +12,13 @@ echo "Logging into Docker hub..."
 
 for image in "${IMAGES[@]}";
 do
-docker tag ${image}:latest ${DOCKER_USERNAME}/${image}:1.0
+docker tag ${image}:latest ${DOCKER_USERNAME}/${image}
 
 echo "Pushing images to Docker hub..."
 
-docker push ${DOCKER_USERNAME}/${image}:1.0
+docker push ${DOCKER_USERNAME}/${image}
 
-echo "Succcessfully pushed image: ${DOCKER_USERNAME}/${image}:1.0}"
+echo "Succcessfully pushed image: ${DOCKER_USERNAME}/${image}"
 
 done
 
