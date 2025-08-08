@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN npm install && npm install prom-client
+RUN npm install
 RUN npm run build
 
 
