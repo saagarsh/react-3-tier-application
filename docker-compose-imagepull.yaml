@@ -1,6 +1,6 @@
 services:
   frontend:
-    image: saagarsh/react-3-tier-application-frontend:1.0
+    image: saagarsh/react-3-tier-application-frontend:$VERSION
     container_name: frontend
     ports:
       - 80:80
@@ -9,25 +9,25 @@ services:
     networks:
       - reactappnetwork
   backend:
-    image: saagarsh/react-3-tier-application-backend:1.0
+    image: saagarsh/react-3-tier-application-backend:$VERSION
     container_name: backend
     ports:
       - 3500:3500
     environment:
-      - MYSQL_HOST=db
-      - MYSQL_USER=root
-      - MYSQL_PASSWORD=mysql123
-      - MYSQL_DATABASE=school
+      - MYSQL_HOST=$MYSQL_HOST
+      - MYSQL_USER=$MYSQL_USER
+      - MYSQL_PASSWORD=$MYSQL_PASSWORD
+      - MYSQL_DATABASE=$MYSQL_DATABASE
     depends_on:
       - db
     networks:
       - reactappnetwork
   db:
-    image: saagarsh/mysql:1.0
-    container_name: mysqldb-c
+    image: saagarsh/react-3-tier-application-db:$VERSION
+    container_name: mysqldb
     environment:
-      - MYSQL_ROOT_PASSWORD=mysql123
-      - MYSQL_DATABASE=school
+      - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
+      - MYSQL_DATABASE=$MYSQL_DATABASE
     volumes:
       - mysql-data:/var/lib/mysql
     networks:

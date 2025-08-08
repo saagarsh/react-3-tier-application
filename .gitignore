@@ -1,1 +1,3 @@
 # add ignored files here.
+
+.env

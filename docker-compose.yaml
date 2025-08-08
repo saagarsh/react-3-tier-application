@@ -14,20 +14,20 @@ services:
     ports:
       - 3500:3500
     environment:
-      - MYSQL_HOST=db
-      - MYSQL_USER=root
-      - MYSQL_PASSWORD=mysql123
-      - MYSQL_DATABASE=school
+      - MYSQL_HOST=$MYSQL_HOST
+      - MYSQL_USER=$MYSQL_USER
+      - MYSQL_PASSWORD=$MYSQL_PASSWORD
+      - MYSQL_DATABASE=$MYSQL_DATABASE
     depends_on:
       - db
     networks:
       - reactappnetwork
   db:
-    image: mysql:latest
-    container_name: mysqldb-c
+    build: ./database
+    container_name: mysqldb
     environment:
-      - MYSQL_ROOT_PASSWORD=mysql123
-      - MYSQL_DATABASE=school
+      - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
+      - MYSQL_DATABASE=$MYSQL_DATABASE
     volumes:
       - mysql-data:/var/lib/mysql
     networks:
