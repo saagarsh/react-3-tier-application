@@ -13,8 +13,6 @@ services:
     container_name: backend
     ports:
       - 3500:3500
-    secrets:
-      - db_credentials
     environment:
       - MYSQL_HOST=$MYSQL_HOST
       - MYSQL_USER=$MYSQL_USER
@@ -27,8 +25,6 @@ services:
   db:
     image: saagarsh/react-3-tier-application-db:$VERSION
     container_name: mysqldb
-    secrets:
-      - db_credentials
     environment:
       - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
       - MYSQL_DATABASE=$MYSQL_DATABASE
@@ -36,6 +32,34 @@ services:
       - mysql-data:/var/lib/mysql
     networks:
       - reactappnetwork
+
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - reactappnetwork
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    networks:
+      - reactappnetwork
+  
+  node_exporter:
+    image: prom/node-exporter
+    container_name: node-exporter
+    ports:
+      - "9100:9100"
+    networks:
+      - reactappnetwork
+
 volumes:
   mysql-data:
 networks:
