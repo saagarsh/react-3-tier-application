@@ -5,9 +5,9 @@ DOCKER_PASSWORD=$DOCKER_PASSWORD
 
 echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
-if [$? -eq 0]; then
-    echo "Logged in successfull."
+if [ $? -eq 1 ]; then
+     echo "some error occured."
 else
-    echo "some error occured."
+    echo "Logged in successful."
 
 fi
