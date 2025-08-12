@@ -1,3 +1,4 @@
 # add ignored files here.
 
 .env
+db_credentials.txt

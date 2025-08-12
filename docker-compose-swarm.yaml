@@ -1,7 +1,8 @@
 services:
   frontend:
-    build: ./frontend
-    container_name: frontend
+    image: saagarsh/react-3-tier-application-frontend:v1.0-2025-08-12_17-32-40
+    #container_name: frontend
+    read_only: true
     ports:
       - 80:80
     depends_on:
@@ -9,8 +10,8 @@ services:
     networks:
       - reactappnetwork
   backend:
-    build: ./backend
-    container_name: backend
+    image: saagarsh/react-3-tier-application-backend:v1.0-2025-08-12_17-32-40
+    #container_name: backend
     read_only: true
     ports:
       - 3500:3500
@@ -24,8 +25,9 @@ services:
     networks:
       - reactappnetwork
   db:
-    build: ./database
-    container_name: mysqldb
+    image: saagarsh/react-3-tier-application-db:v1.0-2025-08-12_17-32-40
+    #container_name: mysqldb
+    read_only: true
     environment:
       - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
       - MYSQL_DATABASE=$MYSQL_DATABASE
@@ -37,7 +39,7 @@ services:
 
   prometheus:
     image: prom/prometheus:latest
-    container_name: prometheus
+    #container_name: prometheus
     ports:
       - "9090:9090"
     volumes:
@@ -47,7 +49,7 @@ services:
 
   grafana:
     image: grafana/grafana:latest
-    container_name: grafana
+    #container_name: grafana
     ports:
       - "3000:3000"
     networks:
@@ -55,7 +57,7 @@ services:
   
   node_exporter:
     image: prom/node-exporter
-    container_name: node-exporter
+    #container_name: node-exporter
     ports:
       - "9100:9100"
     networks:
@@ -65,4 +67,4 @@ volumes:
   mysql-data:
 networks:
   reactappnetwork:
-    driver: bridge
+    driver: overlay

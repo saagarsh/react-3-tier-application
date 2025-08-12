@@ -1,7 +1,11 @@
 FROM mysql:latest
 
-ENV MYSQL_ROOT_PASSWORD=mysql123
+WORKDIR /var/lib/mysql
+ENV MYSQL_ROOT_PASSWORD=root
 ENV MYSQL_DATABASE=school
+RUN chown -R mysql:mysql /var/lib/mysql
+
+USER mysql
 
 EXPOSE 3306
 
